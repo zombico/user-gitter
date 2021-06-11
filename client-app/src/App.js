@@ -1,7 +1,18 @@
+import React, {useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  useEffect(() => {
+    async function getData() {
+      const request = await fetch(
+        "https://api.github.com/search/users?q=example"
+      )
+      const data = await request.json();
+      console.log(data)
+    }
+    getData()
+  },[])
   return (
     <div className="App">
       <header className="App-header">
