@@ -1,5 +1,5 @@
 .search-bar-container {
-  height: 20vh;
+  height: 15vh;
   display: flex;
   justify-content: center;  
   align-items: center;
@@ -14,8 +14,9 @@
 
 }
 .page-control {
-  height: 20vh;
+  height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;  
   align-items: center;
 }

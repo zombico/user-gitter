@@ -80,11 +80,10 @@ function UserSearch() {
           setPage={setPage}
           setResultsView={setResultsView}
           currentPage={currentPage}
+          getData={getData}
         />
-        <button onClick={e => getData(e, currentPage +1)}>
-          Get More
-          </button>
-          </section>
+        
+        </section>
       }
     </>
   )

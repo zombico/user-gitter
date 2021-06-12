@@ -1,4 +1,4 @@
-const PageSwitcher = ({ totalResults, pageNumbers, setPage, setResultsView, currentPage}) => {
+const PageSwitcher = ({ totalResults, pageNumbers, setPage, setResultsView, currentPage, getData}) => {
   let i;
   for (i = 0; i < totalResults.length; i ++) {
     if (!pageNumbers.includes(totalResults.length)){        
@@ -19,9 +19,21 @@ const PageSwitcher = ({ totalResults, pageNumbers, setPage, setResultsView, curr
   ) 
   
   return (
-    <div className="pages-container">
-      <div style={{paddingRight: 20}}>Page</div> {pages}
-    </div>
+    <>
+      <section className="flex">
+        <div className="pages-container">
+          <div style={{paddingRight: 20}}>Page</div> {pages}
+          <button onClick={e => getData(e, currentPage +1)}>
+          Get More
+          </button>
+        </div>      
+      </section>
+      
+      <section>
+        <button>Previous</button>
+        <button>Next</button>
+      </section>
+    </>
   )
 
 }
