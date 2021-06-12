@@ -14,12 +14,12 @@ const PageSwitcher = ({ totalResults, pageNumbers, setPage, setResultsView, curr
   const pages = pageNumbers.map(e => 
     <p 
       key={e} 
-      className={currentPage === e ? "" : ""} 
+      className={currentPage === e ? "page page-active" : "page"} 
       onClick={() => goToPage(e)}>{e}</p>
   ) 
   
   return (
-    <div className="">
+    <div className="pages-container">
       <div style={{paddingRight: 20}}>Page</div> {pages}
     </div>
   )

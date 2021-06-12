@@ -1,1 +1,5 @@
 @import "./components/UserSearch.css";
+
+.flex {
+  display: flex;
+}

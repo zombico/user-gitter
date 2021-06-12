@@ -1,3 +1,33 @@
 .search-bar-container {
+  height: 20vh;
   display: flex;
+  justify-content: center;  
+  align-items: center;
+}
+.search-bar {
+  
+}
+.search-results-container {
+  max-height: 60vh;
+  overflow: auto;
+  padding: 0 0 0 30vw;
+
+}
+.page-control {
+  height: 20vh;
+  display: flex;
+  justify-content: center;  
+  align-items: center;
+}
+.pages-container {
+  display: flex;
+  align-items: center;
+}
+.page {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.page.page-active {
+  border-bottom: 1px solid black;
 }

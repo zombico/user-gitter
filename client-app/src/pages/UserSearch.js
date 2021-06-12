@@ -16,6 +16,7 @@ function UserSearch() {
     return request
   }
 
+  // note: gotta pass 'e' around since the events are triggered by the button
   async function getData(e, page) {
     e.preventDefault()
     const request = await fetch(requestConstructor(searchTerm, page))
@@ -28,16 +29,21 @@ function UserSearch() {
 
   async function getFreshData(e) {
     // reset some state items
-    totalResults.length = 0
-    pageNumbers.length = 0
-    setResultsView(false)
+    clearData(e)
     await getData(e, 1)
   }
 
+  function clearData() {
+    totalResults.length = 0
+    pageNumbers.length = 0
+    setResultsView(false)
+  }
+
   return(
-    <section >
-      <div className="search-bar-container">
-        <form>
+    <>
+    <section className="search-bar-container">      
+      <form> 
+        <div className="search-bar">
           <input 
             type="text"
             onChange={e => setSearchTerm(e.target.value)}
@@ -50,23 +56,24 @@ function UserSearch() {
           >
             Search
           </button>
-        </form>
-      </div>
-      {
+          <button
+            onClick={e => clearData()}            
+          >
+            Clear
+          </button>
+          </div>
+        </form>      
+      
+      
+    </section>
+    {
         resultsView && 
         <ResultsView
           data={resultsView}
         />
       }
-      { resultsView &&
-        <section>
-          <button onClick={e => getData(e, currentPage +1)}>
-          Get More
-          </button>
-        </section>
-      }
       {
-        resultsView && 
+        resultsView && <section className="page-control">
         <PageSwitcher
           totalResults={totalResults}
           pageNumbers={pageNumbers}
@@ -74,8 +81,12 @@ function UserSearch() {
           setResultsView={setResultsView}
           currentPage={currentPage}
         />
+        <button onClick={e => getData(e, currentPage +1)}>
+          Get More
+          </button>
+          </section>
       }
-    </section>
+    </>
   )
 }
 
