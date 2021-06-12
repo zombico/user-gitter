@@ -8,6 +8,7 @@ let pageNumbers = []
 function UserSearch() {
   const [searchTerm, setSearchTerm] = useState("")
   const [resultsView, setResultsView] = useState(false)
+  const [resultsFound, setResultsFound] = useState(null)
   const [currentPage, setPage] = useState(null)
 
   function requestConstructor(term, page) {
@@ -25,6 +26,7 @@ function UserSearch() {
     totalResults.push(...[data.items])
     console.log(totalResults)
     setPage(totalResults.length)
+    setResultsFound(data.total_count)
   }
 
   async function getFreshData(e) {
@@ -38,6 +40,8 @@ function UserSearch() {
     pageNumbers.length = 0
     setResultsView(false)
   }
+
+  const IS_MULTIPAGE = resultsFound > 30
 
   return(
     <>
@@ -61,9 +65,10 @@ function UserSearch() {
           >
             Clear
           </button>
+          {resultsFound && <p style={{textAlign: 'center'}}>{resultsFound} results found.</p>}
           </div>
         </form>      
-      
+        
       
     </section>
     {
@@ -73,7 +78,7 @@ function UserSearch() {
         />
       }
       {
-        resultsView && <section className="page-control">
+        resultsView && IS_MULTIPAGE &&  <section className="page-control">
         <PageSwitcher
           totalResults={totalResults}
           pageNumbers={pageNumbers}

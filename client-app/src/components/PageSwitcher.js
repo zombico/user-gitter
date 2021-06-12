@@ -16,7 +16,9 @@ const PageSwitcher = ({ totalResults, pageNumbers, setPage, setResultsView, curr
       key={e} 
       className={currentPage === e ? "page page-active" : "page"} 
       onClick={() => goToPage(e)}>{e}</p>
-  ) 
+  )
+
+  const CAN_GO_NEXT = currentPage < totalResults.length 
   
   return (
     <>
@@ -30,8 +32,12 @@ const PageSwitcher = ({ totalResults, pageNumbers, setPage, setResultsView, curr
       </section>
       
       <section>
-        <button>Previous</button>
-        <button>Next</button>
+        { currentPage !== 1 && 
+          <button onClick={() => goToPage(currentPage - 1)}>Previous</button> 
+        }
+        { CAN_GO_NEXT && 
+          <button onClick={() => goToPage(currentPage + 1)}>Next</button> 
+        }
       </section>
     </>
   )
