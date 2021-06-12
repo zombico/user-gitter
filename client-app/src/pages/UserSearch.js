@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react';
+import PageSwitcher from '../components/PageSwitcher'
+import ResultsView from '../components/ResultsView'
 
 let totalResults = []
+let pageNumbers = []
 
 function UserSearch() {
   const [searchTerm, setSearchTerm] = useState("")
@@ -26,6 +29,7 @@ function UserSearch() {
   async function getFreshData(e) {
     // reset some state items
     totalResults.length = 0
+    pageNumbers.length = 0
     setResultsView(false)
     await getData(e, 1)
   }
@@ -48,6 +52,12 @@ function UserSearch() {
           </button>
         </form>
       </div>
+      {
+        resultsView && 
+        <ResultsView
+          data={resultsView}
+        />
+      }
       { resultsView &&
         <section>
           <button onClick={e => getData(e, currentPage +1)}>
@@ -56,10 +66,14 @@ function UserSearch() {
         </section>
       }
       {
-        // showOptions && 
-        <>
-
-        </>
+        resultsView && 
+        <PageSwitcher
+          totalResults={totalResults}
+          pageNumbers={pageNumbers}
+          setPage={setPage}
+          setResultsView={setResultsView}
+          currentPage={currentPage}
+        />
       }
     </section>
   )
