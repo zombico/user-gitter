@@ -1,45 +1,60 @@
 import React, {useState, useEffect} from 'react';
 
+let totalResults = []
+
 function UserSearch() {
   const [searchTerm, setSearchTerm] = useState("")
   const [resultsView, setResultsView] = useState(false)
-  // const [showOptions, setShowOptions] = useState(false)
-  // useEffect(() => {
-  //   async function getData() {
-  //     const request = await fetch(
-  //       "https://api.github.com/search/users?p=2&q=franz+in%3Aname+type%3Auser&type=Users"
-  //     )
-  //     const data = await request.json();
-  //     console.log(data)
-  //   }
-  //   getData()
-  // },[])
+  const [currentPage, setPage] = useState(null)
 
-  function requestConstructor(term) {
+  function requestConstructor(term, page) {
     const baseUrl = "https://api.github.com/search/users?"
-    const request = `${baseUrl}q=${term}+in%3Aname+type%3Auser&type=Users`
+    const request = `${baseUrl}page=${page}&q=${term}+in%3Aname+type%3Auser&type=Users`
     return request
   }
 
-  async function getData() {
-    const request = await fetch(requestConstructor(searchTerm))
-    const data = await request.json();
-    setResultsView(data)
+  async function getData(e, page) {
+    e.preventDefault()
+    const request = await fetch(requestConstructor(searchTerm, page))
+    const data = await request.json()
+    setResultsView(data.items)
+    totalResults.push(...[data.items])
+    console.log(totalResults)
+    setPage(totalResults.length)
+  }
+
+  async function getFreshData(e) {
+    // reset some state items
+    totalResults.length = 0
+    setResultsView(false)
+    await getData(e, 1)
   }
 
   return(
-    <section className="search-bar-container">
-      <input 
-        type="text"
-        onChange={e => setSearchTerm(e.target.value)}
-        value={searchTerm}
-      />
+    <section >
+      <div className="search-bar-container">
+        <form>
+          <input 
+            type="text"
+            onChange={e => setSearchTerm(e.target.value)}
+            value={searchTerm}
+          />
 
-      <button
-        onClick={() => getData()}
-      >
-        Search
-      </button>
+          <button
+            onClick={e => getFreshData(e)}
+            type="submit"
+          >
+            Search
+          </button>
+        </form>
+      </div>
+      { resultsView &&
+        <section>
+          <button onClick={e => getData(e, currentPage +1)}>
+          Get More
+          </button>
+        </section>
+      }
       {
         // showOptions && 
         <>
