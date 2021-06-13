@@ -86,13 +86,10 @@ label {
 .focus-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;  
-  /* background: whitesmoke; */
-  /* align-items: center; */
+  justify-content: space-between;    
   max-width: 600px;
-  width: 100%;
-  cursor: pointer;
-  padding: 10px 20px;
+  width: 100%;  
+  padding: 0px 20px 20px 20px;
 }
 .focus-name {
   margin: 5px 0;

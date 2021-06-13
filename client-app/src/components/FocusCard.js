@@ -1,25 +1,43 @@
 import {useEffect, useState} from 'react'
 
-function FocusCard({data}) {
-  // const [followerCount, setFollowers] = useState(null)
-  const [focusData, setFocusData] = useState(null)
+function FocusCard({data}) {  
+  const [userData, setUserData] = useState(null)
+  const [reposData, setReposData] = useState(null)
   useEffect(async ()=>{
-    // check followers
-    const request = await fetch(`https://api.github.com/users/${data.login}`)
-    const res = await request.json()
-    console.log(res)
-    setFocusData(res)
-    console.log(focusData)
+    // Get user data
+    const user_request = await fetch(`https://api.github.com/users/${data.login}`)
+    const user_res = await user_request.json()
+    setUserData(user_res)
+    // Get repos data for some stars count
+    const repos_request = await fetch(`https://api.github.com/users/${data.login}/repos?per_page=100`)
+    const repos_res = await repos_request.json()
+    setReposData(repos_res)
   },[])
+
+  function getStars(repos) {
+    const total = repos?.map(e => e.stargazers_count)
+    return total
+  }
+
+  const stars = getStars(reposData)
+  // const array1 = [1, 2, 3, 4];
+  const reducer = (accumulator, currentValue) => accumulator + currentValue
+  const starCount = stars?.reduce(reducer) 
   
+  console.log(starCount)
     
     return (
       <div className="focus-card row-active">
-        <h3 className="focus-name">{focusData?.name}</h3>
-        {focusData?.bio && <p>{focusData?.bio}</p>}
+        <div className="flex space-between align-center">
+          <h3 className="focus-name">{userData?.name}</h3>
+          
+        </div>
+        <span>★ {starCount}</span>
+        {userData?.bio && <p>{userData?.bio}</p>}
+        
         <div>
-          {focusData?.followers && <span>{focusData?.followers} followers | </span>}        
-          {focusData?.following && <span>{focusData?.following} following</span>}        
+          {userData?.followers && <span>{userData?.followers} followers | </span>}        
+          {userData?.following && <span>{userData?.following} following</span>}        
         </div>
       </div>
     )
