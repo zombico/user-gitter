@@ -13,7 +13,7 @@ function UserSearch() {
 
   function requestConstructor(term, page) {
     const baseUrl = "https://api.github.com/search/users?"
-    const request = `${baseUrl}page=${page}&q=${term}+in%3Aname+type%3Auser&type=Users`
+    const request = `${baseUrl}page=${page}&q=${term}+in%3Aname+in%3Alogin+type%3Auser`
     return request
   }
 
@@ -52,7 +52,7 @@ function UserSearch() {
       <form className="flex"> 
         
           <div className="flex column">
-            <label for="search-bar">Search for a user</label>
+            <label for="search-bar">Search by user or name</label>
             <input
               id="search-bar" 
               type="text"

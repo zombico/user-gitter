@@ -20,9 +20,9 @@ function FocusCard({data}) {
   }
 
   const stars = getStars(reposData)
-  // const array1 = [1, 2, 3, 4];
+  
   const reducer = (accumulator, currentValue) => accumulator + currentValue
-  const starCount = stars?.reduce(reducer) 
+  const starCount = stars?.length && stars?.reduce(reducer) 
   
   console.log(starCount)
     
