@@ -1,8 +1,10 @@
 .search-bar-container {
-  height: 15vh;
+  height: 20vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;  
   align-items: center;
+  /* border-bottom: 1px solid darkslategray; */
 }
 .search-bar {
   
@@ -10,8 +12,34 @@
 .search-results-container {
   max-height: 60vh;
   overflow: auto;
-  padding: 0 0 0 30vw;
+  /* padding: 0 0 0 27vw; */
+  border-top: 1px solid darkslategray;
+  border-bottom: 1px solid darkslategray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
+}
+.user-row {
+  display: flex;
+  justify-content: space-between;  
+  align-items: center;
+  max-width: 45vw;
+  width: 100%;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+.user-row:hover {
+  background: whitesmoke;
+}
+.user-avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+.user-name {
+  padding-left: 10px;
+  font-weight: 400;
 }
 .page-control {
   height: 100%;
@@ -19,6 +47,7 @@
   flex-direction: column;
   justify-content: center;  
   align-items: center;
+  /* border-top: 1px solid darkslategray; */
 }
 .pages-container {
   display: flex;
@@ -31,4 +60,18 @@
 
 .page.page-active {
   border-bottom: 1px solid black;
+}
+
+.subtitle {
+  font-weight: 300;
+  font-size: .85em;
+}
+
+.link-profile {
+  font-weight: 300;
+}
+
+label {
+  font-size: .85em;
+  padding-bottom: 5px;
 }

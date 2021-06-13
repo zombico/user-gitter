@@ -42,34 +42,48 @@ function UserSearch() {
   }
 
   const IS_MULTIPAGE = resultsFound > 30
+  const HAS_RESULTS = resultsFound > 1
+  const NO_RESULTS = resultsFound === 0
 
   return(
     <>
-    <section className="search-bar-container">      
-      <form> 
-        <div className="search-bar">
-          <input 
-            type="text"
-            onChange={e => setSearchTerm(e.target.value)}
-            value={searchTerm}
-          />
-
-          <button
-            onClick={e => getFreshData(e)}
-            type="submit"
-          >
-            Search
-          </button>
-          <button
-            onClick={e => clearData()}            
-          >
-            Clear
-          </button>
-          {resultsFound && <p style={{textAlign: 'center'}}>{resultsFound} results found.</p>}
-          </div>
-        </form>      
+    <section className="search-bar-container">   
+    <h1>User Gitter <span className="subtitle">for Github</span></h1>       
+      <form className="flex"> 
         
-      
+          <div className="flex column">
+            <label for="search-bar">Search for a user</label>
+            <input
+              id="search-bar" 
+              type="text"
+              onChange={e => setSearchTerm(e.target.value)}
+              value={searchTerm}
+            />
+          </div>
+          <div className="flex align-end">
+            <button
+              onClick={e => getFreshData(e)}
+              type="submit"
+            >
+              Search
+            </button>
+            <button
+              onClick={e => clearData()}            
+            >
+              Clear
+            </button>
+          </div>
+          
+        
+      </form>
+      <p style={{textAlign: 'center'}}>
+          {HAS_RESULTS &&
+           `${resultsFound} results found.`                       
+          }
+          {NO_RESULTS &&
+           `No results found.`                       
+          }
+          </p>
     </section>
     {
         resultsView && 
