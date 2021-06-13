@@ -24,12 +24,19 @@
   display: flex;
   justify-content: space-between;  
   align-items: center;
-  max-width: 45vw;
+  max-width: 600px;
   width: 100%;
   cursor: pointer;
   padding: 10px 20px;
+  border-top: 1px solid lightgray;
 }
 .user-row:hover {
+  background: gainsboro;
+}
+.user-row:first-child {
+  border-top: none;
+}
+.row-active {
   background: whitesmoke;
 }
 .user-avatar {
@@ -74,4 +81,20 @@
 label {
   font-size: .85em;
   padding-bottom: 5px;
+}
+
+.focus-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;  
+  /* background: whitesmoke; */
+  /* align-items: center; */
+  max-width: 600px;
+  width: 100%;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+.focus-name {
+  margin: 5px 0;
+  font-weight: 400;
 }
